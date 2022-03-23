@@ -26,18 +26,22 @@
       height: 100vh;
     }
     .titre{
-      width: 100%;
+      width: fit-content;
       padding: 10px;
-      font-size: 50px;
-      color: #111d5e;
+      font-size: 35px;
+      color: #383838;
+      position: absolute;
+      top: 0;
+      right: 35%;
+      height: fit-content;
       background: white;
     }
 
     .container{
-      width: 35%;
+      width: auto;
       position: absolute;
-      left: 80%;
-      top: 2.8%;
+      left: 69%;
+      top: 2.2%;
       transform: translate(-50% , -50%);
     }
 
@@ -66,6 +70,16 @@
     	-o-transition: all .3s ease-out;
     	-ms-transition: all .3s ease-out;
     	transition: all .3s ease-out;
+    }
+
+    .home_button{
+      background: #111d5e;
+      border-color: #111d5e;
+      top: 0;
+      right: 0;
+      margin-top: 0px;
+      margin-right: 0px;
+      position: absolute;
     }
 
     .normal_button {
@@ -124,6 +138,7 @@
       background: rgba(0,0,0,0);
     }
 
+
 </style>
 
 </head>
@@ -133,8 +148,9 @@
     <a href=deuxroues><button class="deuxroues_button" data-direction="down">Parkings 2 roues  <i class="fa fa-motorcycle" aria-hidden="true"></i></button></a>
     <a href=terrains><button class="terrains_button" data-direction="down">Terrains  <i class="fa fa-futbol-o" aria-hidden="true"></i></button></a>
     <a href=squares><button class="squares_button" data-direction="down">Squares   <i class="fa fa-tree" aria-hidden="true"></i></button></a>
+    
 
-<div style="width: 100%; height: 100%" id="mapContainer"></div>
+<div style="width: auto; height: auto;" id="mapContainer"></div>
 
 <script>
       var data = {
@@ -707,7 +723,7 @@
 
       function evt(evt)
       {
-        var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), { content: evt.target.getData() }, {icon : });
+        var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), { content: evt.target.getData() });
         // show info bubble
         ui.addBubble(bubble);
       }
@@ -733,8 +749,12 @@
 
   </script>
 
-  <div class="container">
-    <h1 class='titre'><b>ARGENTEUIL</b></h1>
+  <div>
+    <b class='titre'>ARGENTEUIL</b>
+  </div>
+
+  <div>
+    <a href="http://127.0.0.1:5000/"><button class="home_button" data-direction="down">Home   <i class="fa fa-map" aria-hidden="true"></i></button></a>
   </div>
 
 </body>
