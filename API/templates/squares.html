@@ -467,11 +467,36 @@
       const behavior = new H.mapevents.Behavior(mapEvents);
       const ui = H.ui.UI.createDefault(map, defaultMapLayers);
 
+      function addMarkerToGroup(group, coordinate, html) 
+      {
+        var marker = new H.map.Marker(coordinate);
+        marker.setData(html);
+        group.addObject(marker);
+      }
+
+      function evt (evt)
+      {
+        var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), { content: evt.target.getData() });
+        // show info bubble
+        ui.addBubble(bubble);
+      }
+
+      function addInfoBubble(map,name,lati, long, address,capacity)
+      {
+        var group = new H.map.Group();
+        map.addObject(group);
+        // add 'tap' event listener, that opens info bubble, to the group
+        group.addEventListener('tap', evt, false);
+        
+        addMarkerToGroup(group, {lat: lati, lng: long},
+        `<div>Name: <a><b>${name}</b></a></div>` +
+        `<div>Address: <br /><b>${address}</b></div>`+
+        `<div>Capacity: <a><b>${capacity}</b></a></div>`);
+      }
+
       for (var i=0; i<data.records.length; i++)
       {
-        var coord = {lat: data.records[i].yCoordinate, lng: data.records[i].xCoordinate};
-        var marker = new H.map.Marker(coord);
-        map.addObject(marker);
+        addInfoBubble(map, data.records[i].namePlace, data.records[i].yCoordinate, data.records[i].xCoordinate, data.records[i].address, data.records[i].number)
       }
 
   </script>
